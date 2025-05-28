@@ -1,0 +1,816 @@
+@font-face {
+    font-family: 'Formula1';
+    src: url('https://www.formula1.com/etc/designs/fom-website/fonts/F1Regular/Formula1-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Formula1';
+    src: url('https://www.formula1.com/etc/designs/fom-website/fonts/F1Bold/Formula1-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --f1-red: #e10600;
+    --f1-black: #15151e;
+    --f1-gray: #38383f;
+    --f1-light: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Formula1', sans-serif;
+    background-color: var(--f1-black);
+    color: var(--f1-light);
+    min-height: 100vh;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--f1-black);
+    padding: 1rem;
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-logo {
+    height: 2.5rem;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--f1-red);
+}
+
+.header-year {
+    color: var(--f1-light);
+}
+
+.header-nav {
+    display: none;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trophy-icon {
+    color: var(--f1-red);
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: var(--f1-black);
+    color: var(--f1-light);
+    border: 1px solid var(--f1-gray);
+    border-radius: 8px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+}
+
+.circuit-popup {
+    padding: 1rem;
+}
+
+.popup-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--f1-red);
+    margin-bottom: 1rem;
+}
+
+.popup-details {
+    margin-bottom: 1rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.detail-label {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.detail-value {
+    font-weight: bold;
+    color: var(--f1-light);
+}
+
+.circuit-popup-image {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.circuit-popup-image:hover {
+    transform: scale(1.05);
+}
+
+
+.circuit-popup-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.375rem;
+}
+
+
+.team-drivers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+.team-driver-card {
+    background-color: var(--f1-gray);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.team-driver-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.team-driver-name {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.team-driver-number {
+    color: var(--f1-red);
+    font-size: 0.875rem;
+}
+
+
+/* Circuit Item Styles */
+.circuit-item {
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+    margin-bottom: 0.5rem;
+}
+
+.circuit-item:hover {
+    background-color: var(--f1-red);
+    transform: translateY(-2px);
+}
+
+.circuit-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--f1-light);
+    margin-bottom: 0.25rem;
+}
+
+.circuit-location {
+    font-size: 0.9em;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+}
+
+.circuit-image {
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-radius: 0.375rem;
+}
+
+.circuit-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    transition: transform 0.3s ease;
+}
+
+.circuit-item:hover .circuit-image img {
+    transform: scale(1.05);
+}
+
+.circuit-details {
+    font-size: 0.9em;
+    color: #9ca3af;
+    margin-top: 0.5rem;
+}
+
+.circuit-details div {
+    margin-bottom: 0.25rem;
+}
+
+/* Main Content Styles */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+@media (min-width: 768px) {
+    .header-nav {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .header-nav a {
+        color: var(--f1-light);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+        color: var(--f1-red);
+    }
+
+    .season-text {
+        display: inline;
+    }
+
+    .main-content {
+        flex-direction: row;
+    }
+}
+
+/* Panels */
+.panel-header {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.panel-header h2 {
+    font-weight: bold;
+    color: var(--f1-red);
+    letter-spacing: 0.05em;
+}
+
+/* Drivers Panel */
+.drivers-panel {
+    width: 100%;
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+    border-radius: 0.375rem;
+    margin: 0.5rem;
+}
+
+.drivers-list {
+    padding: 0.5rem;
+}
+
+.driver-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.driver-card:hover {
+    background-color: var(--f1-gray);
+}
+
+.driver-number {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--f1-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.driver-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.driver-name {
+    font-weight: bold;
+}
+
+.driver-team {
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+/* Map Container */
+.map-container {
+    flex: 1;
+    position: relative;
+    height: 500px;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Circuits Panel */
+.circuits-panel {
+    width: 100%;
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+    border-radius: 0.375rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    position: relative;
+    margin-top: 0.5rem;
+}
+
+#circuit-search {
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    background-color: var(--f1-gray);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    outline: none;
+}
+
+#circuit-search:focus {
+    box-shadow: 0 0 0 2px var(--f1-red);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.circuits-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    max-height: 400px;
+}
+
+.circuit-item {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+
+.circuit-item:hover {
+    background-color: var(--f1-red);
+}
+
+.circuit-name {
+    font-weight: bold;
+}
+
+.circuit-location {
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+.circuits-footer {
+    padding: 0.75rem;
+    border-top: 1px solid var(--f1-gray);
+    text-align: center;
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+/* Teams Panel */
+.teams-panel {
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+    border-radius: 0.375rem;
+    margin: 0.5rem;
+}
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--f1-gray);
+    border-radius: 0.375rem;
+    transition: all 0.3s;
+}
+
+.team-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-logo {
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--f1-black);
+    border: 1px solid var(--f1-gray);
+    border-radius: 0.375rem;
+    max-width: 32rem;
+    width: 90%;
+    padding: 1.5rem;
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--f1-red);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.close-modal:hover {
+    color: white;
+}
+
+.modal-body {
+    display: flex;
+    gap: 1rem;
+}
+
+.driver-photo {
+    width: 33.333333%;
+    border-radius: 0.375rem;
+}
+
+.driver-details {
+    width: 66.666667%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.detail-label {
+    color: #9ca3af;
+}
+
+.detail-value {
+    font-weight: bold;
+}
+
+.driver-bio {
+    margin-top: 1rem;
+}
+
+.driver-bio h3 {
+    color: var(--f1-red);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.driver-bio p {
+    font-size: 0.875rem;
+}
+/* Standings Section Styles */
+.standings-section {
+    background-color: var(--f1-black);
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--f1-gray);
+}
+
+.standings-container, .results-container {
+    margin-bottom: 2rem;
+}
+
+.standings-header {
+    margin-bottom: 1.5rem;
+}
+
+.standings-header h2 {
+    color: var(--f1-red);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.standings-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--f1-gray);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.standings-item:hover {
+    transform: translateX(5px);
+}
+
+.standings-position {
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 40px;
+    text-align: center;
+}
+
+.standings-team-logo {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+    margin: 0 1rem;
+}
+
+.standings-team-info {
+    flex: 1;
+}
+
+.standings-team-name {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.standings-stats {
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+.standings-stats span {
+    margin-right: 1rem;
+}
+
+.standings-points-bar {
+    flex: 2;
+    height: 24px;
+    background-color: var(--f1-black);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-left: 1rem;
+}
+
+.points-bar {
+    height: 100%;
+    background-color: var(--f1-red);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    transition: width 0.3s ease;
+}
+
+.points-value {
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+/* Race Results Styles */
+.race-result-item {
+    background-color: var(--f1-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: transform 0.2s;
+}
+
+.race-result-item:hover {
+    transform: translateX(5px);
+}
+
+.race-info {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.race-round {
+    font-size: 0.875rem;
+    color: var(--f1-red);
+    margin-bottom: 0.25rem;
+}
+
+.race-name {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.race-date {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.race-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.winner-info {
+    flex: 1;
+}
+
+.winner-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--f1-red);
+    margin-bottom: 0.25rem;
+}
+
+.winner-name {
+    font-weight: bold;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+}
+
+.winner-car {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.race-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat {
+    text-align: right;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Add smooth scrolling to the whole document */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .header-nav {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .header-nav a {
+        color: var(--f1-light);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+        color: var(--f1-red);
+    }
+
+    .season-text {
+        display: inline;
+    }
+
+    .main-content {
+        flex-direction: row;
+    }
+
+    .drivers-panel {
+        width: 16rem;
+    }
+
+    .circuits-panel {
+        width: 18rem;
+    }
+
+    .map-container {
+        height: auto;
+    }
+
+    .standings-section {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 2rem;
+    }
+}
+.nearest-circuit-btn {
+    background-color: var(--f1-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    width: 100%;
+    transition: background-color 0.2s;
+    font-family: 'Formula1', sans-serif;
+}
+
+.nearest-circuit-btn:hover {
+    background-color: #b30500;
+}
+
+.user-location-popup h3 {
+    color: var(--f1-red);
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.user-location-popup p {
+    margin-bottom: 4px;
+}

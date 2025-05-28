@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Map Diary 2025</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo" alt="F1 Logo" class="header-logo">
+                    <h1 class="header-title">F1 MAP DIARY <span class="header-year">2025</span></h1>
+                </div>
+                <nav class="header-nav">
+                    <a href="#circuits">Circuits</a>
+                    <a href="#drivers">Pilots</a>
+                    <a href="#teams">Teams</a>
+                    <a href="#standings">Standings</a>
+                    <a href="https://www.formula1.com" target="_blank" rel="noopener noreferrer" class="official-f1-link">F1.com</a>
+                </nav>
+                <div class="header-right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="trophy-icon"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                    <span class="season-text">2025 Season</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Drivers Panel -->
+            <div class="drivers-panel">
+                <div class="panel-header">
+                    <h2>TOP PILOTS 2025 - BASED ON PTS</h2>
+                </div>
+                <div class="drivers-list"></div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+
+            <!-- Circuits Panel -->
+            <div class="circuits-panel">
+                <div class="panel-header">
+                    <h2>F1 CIRCUITS</h2>
+                    <div class="search-container">
+                        <input type="text" id="circuit-search" placeholder="Search circuits...">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    </div>
+                    <div class="panel-header">
+    <h2>F1 CIRCUITS</h2>
+    <div class="search-container">
+        <input type="text" id="circuit-search" placeholder="Search circuits...">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+    </div>
+    <button class="nearest-circuit-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        Find Nearest Circuit
+    </button>
+</div>
+
+                </div>
+                <div class="circuits-list"></div>
+                <div class="circuits-footer">
+                    <span>77 Circuits • 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teams Panel -->
+        <div class="teams-panel">
+            <div class="panel-header">
+                <h2>F1 TEAMS 2025</h2>
+            </div>
+            <div class="teams-grid"></div>
+        </div>
+    </div>
+    <!-- Standings Section -->
+    <div class="standings-section">
+        <div class="standings-container">
+            <div class="standings-header">
+                <h2>2025 TEAM STANDINGS</h2>
+            </div>
+            <div class="standings-grid">
+                <!-- Team standings will be populated here -->
+            </div>
+        </div>
+        <div class="results-container">
+            <div class="standings-header">
+                <h2>2025 RACE RESULTS</h2>
+            </div>
+            <div class="results-grid">
+                <!-- Race results will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Driver Modal -->
+    <div id="driver-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-driver-name"></h2>
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="driver-info"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
